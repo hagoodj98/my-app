@@ -38,11 +38,6 @@ export default function TextControlsExample() {
 
     function handleChange(event) {
         const { name, value } = event.target;
-     
-        //console.log(name);
-       // console.log(value);
-        
-   
         setBookInfo((prevBook) => {
           return {
             ...prevBook,
@@ -54,9 +49,12 @@ export default function TextControlsExample() {
 
     return (
       <form onSubmit={onSubmitForm}>
+        <div>
           <input type="text"  name="isbn" onChange={handleChange} value={bookInfo.isbn} placeholder="name@example.com" />
           <textarea  name="summary"  onChange={handleChange} value={bookInfo.summary}  rows={3} />
-        <Button  type='submit' variant="primary">Secondary</Button>
+          <Button  type='submit' variant="primary">Secondary</Button>
+        </div>
+          
       </form>
     );
   }

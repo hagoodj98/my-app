@@ -87,7 +87,7 @@ export default function EntryID () {
         return (
     <main>
          <h3 className={styles.header}>AboutThisEntry__</h3>
-        <div className="container-fluid">
+        <div className="container">
             <div>
               <div>
                 {specifedEntry.map((entry, index) => (

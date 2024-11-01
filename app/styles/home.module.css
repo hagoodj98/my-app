@@ -63,7 +63,10 @@
 .modal{
     background-color: #AED2F2;
 }
-.add, .addnote:hover{
+ .addnote:hover{
+    background-color: #BEB1A0;
+}
+.add:hover{
     background-color: #BEB1A0;
 }
 
