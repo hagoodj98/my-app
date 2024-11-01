@@ -7,6 +7,22 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import Button from '@mui/material/Button';
 import axios from "axios";
 import styles from '../styles/home.module.css';
+import { Work_Sans, Anton } from "next/font/google";
+
+
+const antonSC = Anton({
+subsets: ['latin'],
+display: 'swap',
+weight: '400',
+
+})
+const worksans =  Work_Sans({
+  subsets:['latin'],
+  display: 'swap',
+})
+
+
+
 
 function EditSummary(props) {
 
@@ -46,7 +62,7 @@ function EditSummary(props) {
             </Button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header className={styles.modal} closeButton>
-                <Modal.Title className={styles.modaltitle}>Update Summary</Modal.Title>
+                <Modal.Title className={styles.modaltitle}>  <span className={worksans.className}>Update Summary</span></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                 <Form>
@@ -54,11 +70,11 @@ function EditSummary(props) {
                     className="mb-3"
                     controlId="exampleForm.ControlTextarea1"
                     >
-                    <Form.Label>Summary</Form.Label>
+                    <Form.Label className={worksans.className}>Summary</Form.Label>
                     <Form.Control as="textarea" value={prevSummary} onChange={e => setNewSummary(e.target.value)}  rows={3} />
                     </Form.Group>
-                    <Button variant="primary" type="submit" onClick={e => updateSummary(e)}>
-                        Update
+                    <Button variant="outlined" type="submit"  className={styles.actionbutton} onClick={e => updateSummary(e)}>
+                       <span className={worksans.className}> Update</span>
                     </Button>
                 </Form>
                 </Modal.Body>

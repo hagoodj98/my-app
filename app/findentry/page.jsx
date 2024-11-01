@@ -8,7 +8,18 @@ import { useRouter } from 'next/navigation'
 import styles from '../styles/home.module.css'
 import TextField from '@mui/material/TextField';
 import Footer from '../components/footer';
+import { Work_Sans, Anton } from "next/font/google";
 
+const antonSC = Anton({
+subsets: ['latin'],
+display: 'swap',
+weight: '400',
+
+})
+const worksans =  Work_Sans({
+  subsets:['latin'],
+  display: 'swap',
+})
 
 
 
@@ -65,7 +76,7 @@ export default function TextControlsExample() {
           
           <div className={styles.addentry}>
             <div className={styles.form}>
-            <h2 className='m-2'>Find Book</h2>
+            <h2 className='m-2'><span className={antonSC.className}>Find Book</span></h2>
             <div className={styles.d}>
               <Form onSubmit={onSubmitForm}>
                 <Form.Group  controlId="exampleForm.ControlInput1">
@@ -76,7 +87,7 @@ export default function TextControlsExample() {
                   <Form.Control as={"textarea"} name="summary" required  onChange={handleChange} placeholder='Enter Summary...' value={bookInfo.summary}  rows={3} />
                 </Form.Group>
                 <div className='d-flex justify-center'>
-                  <Button type='submit' variant="outlined">Add Entry</Button>
+                  <Button className={worksans.className} type='submit' variant="outlined">Add Entry</Button>
                 </div>
               </Form>
             </div>

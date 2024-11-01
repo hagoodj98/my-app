@@ -68,14 +68,24 @@
 .hr{
     color: #AED2F2;
 }
+.navsorts Button{
+    color: #BEB1A0;
+}
 .accordion{
     background-color: #3C93A7;
     color: white;
 }
 .actionbutton{
     border: .5 solid #BEB1A0;
-    background-color: #3C93A7;
-    color: white;
+    
+    color: #3C93A7;
+}
+.abouttitle{
+    color: #BEB1A0;
+    margin: 20px 0;
+}
+.notes{
+    color: #3C93A7;
 }
 .modaltitle{
     color: white;
@@ -133,7 +143,6 @@
       .sortnav{
         width: 100%;
         padding-top: 20px;
-        margin-left: 40px;
         color: #BEB1A0;
     }
     .buttonnav{

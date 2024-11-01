@@ -21,6 +21,24 @@ import styles from '../../styles/home.module.css'
 import IconButton from '@mui/material/IconButton';
 import Fade from '@mui/material/Fade';
 import Footer from '../../components/footer'
+import { Work_Sans, Anton } from "next/font/google";
+
+
+const antonSC = Anton({
+subsets: ['latin'],
+display: 'swap',
+weight: '400',
+
+})
+const worksans =  Work_Sans({
+  subsets:['latin'],
+  display: 'swap',
+})
+
+
+
+
+
 
 export default function EntryID () {
     const params = useParams();
@@ -86,7 +104,7 @@ export default function EntryID () {
           });
         return (
     <main>
-         <h3 className={styles.header}>AboutThisEntry__</h3>
+         <h3 className={styles.header}> <span className={antonSC.className}>AboutThisEntry__</span></h3>
         <div className="container">
             <div>
               <div>
@@ -99,34 +117,34 @@ export default function EntryID () {
                         </div>
                         <div className={styles.div}>
                             <div className={styles.aboutentry}>
-                                <h2 className="mb-4">{entry.title} | {entry.authors}</h2>
+                                <h2 className={styles.abouttitle}><span className={antonSC.className}>{entry.title} | {entry.authors}</span></h2>
                                 <Accordion>
                                     <AccordionSummary  className={styles.accordion}  expandIcon={<ExpandMoreIcon />} aria-controls="panel2-content" id="panel2-header">
-                                        <h5>Published On</h5>
+                                        <h5 className={worksans.className}>Published On</h5>
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                        <p>{entry.publish_date}</p>
+                                        <p className={worksans.className}>{entry.publish_date}</p>
                                     </AccordionDetails>
                                 </Accordion>    
                                 <Accordion>
                                     <AccordionSummary className={styles.accordion} expandIcon={<ExpandMoreIcon />} aria-controls="panel2-content" id="panel2-header">
-                                        <h5>Summary</h5>
+                                        <h5 className={worksans.className}>Summary</h5>
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                        <p>{entry.summary}</p>
+                                        <p className={worksans.className}>{entry.summary}</p>
                                     </AccordionDetails>
                                 </Accordion>        
                                 <Accordion>
                                     <AccordionSummary  className={styles.accordion}  expandIcon={<ExpandMoreIcon />} aria-controls="panel2-content" id="panel2-header">
-                                        <h5>Subjects</h5>
+                                        <h5 className={worksans.className}>Subjects</h5>
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                        <p>{entry.subjects}</p>
+                                        <p className={worksans.className}>{entry.subjects}</p>
                                     </AccordionDetails>
                                 </Accordion> 
                                 <div className="d-flex gap-3 mt-3">
                                     <Link href={"../../"}><Button className={styles.actionbutton} variant="outlined">Back To Blog</Button></Link>
-                                    <Link href={`https://www.amazon.com/dp/${entry.isbn}/?tag=internetarchi-20`}><Button className={styles.actionbutton} variant="outlined">Amazon</Button></Link>
+                                    <Link href={`https://www.amazon.com/dp/${entry.isbn}/?tag=internetarchi-20`}><Button className={styles.actionbutton} variant="outlined"><span className={worksans.className}>Amazon</span></Button></Link>
                                 </div>
                             </div>
                         </div>
@@ -137,7 +155,7 @@ export default function EntryID () {
             </div>
             <hr className={styles.hr}/>
             <div className="p-2">
-                <h2>My Notes</h2>
+                <h2 className={antonSC.className}><span className={styles.notes}>My Notes</span></h2>
                 {notes.map((note, index) => (
                     <div className="d-flex" key={index}>
                         <div>
@@ -146,7 +164,7 @@ export default function EntryID () {
                             </IconButton>
                         </div>
                         <div>
-                            <p>{  note.note_submission}</p>
+                            <p className={worksans.className}>{  note.note_submission}</p>
                         </div>
                         <div>
                             <UpdateNote note={note.note_submission} id={note.note_id}/>

@@ -11,10 +11,22 @@ import StarIcon from '@mui/icons-material/Star';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import Footer from './components/footer';
+import { Work_Sans, Anton } from "next/font/google";
+
+
+const antonSC = Anton({
+subsets: ['latin'],
+display: 'swap',
+weight: '400',
+
+})
+const worksans =  Work_Sans({
+  subsets:['latin'],
+  display: 'swap',
+})
+
 
 export default function Home() {
-
-
 const [entries, setEntries] = useState([]);
 
 const sortByTitle = async () => {
@@ -87,21 +99,28 @@ const deleteSummaryAPI = async (id) => {
      
    }
  }
- 
 
   return ( 
       <div>
         <div className={styles.sortnav}>
-          <h3 className="mx-2">Sort By:</h3>
+          <div className={antonSC.className}>
+            <h3 className="mx-2">Sort By:</h3>
+          </div>
           <div className="d-flex gap-2">
-            <Button onClick={sortByTitle} variant="text">Title</Button>
-            <Button onClick={sortByRecency} variant="text">Latest</Button>
-            <Button onClick={sortByOldest} variant="text">Oldest</Button>
-            <Button onClick={sortByRevelance} variant="text">Most Popular</Button>
+            <div  className={styles.navsorts}>
+            <Button className={worksans.className} onClick={sortByTitle} variant="text"> <span >Title</span></Button>
+            <Button className={worksans.className} onClick={sortByRecency} variant="text"><span>Latest</span></Button>
+            <Button  className={worksans.className} onClick={sortByOldest} variant="text"> <span>Oldest</span></Button>
+            <Button className={worksans.className} onClick={sortByRevelance} variant="text"> <span>Most Popular</span></Button>
+
+            </div>
           </div>
         </div>
         <div className={styles.header}>
-          <h1 className="text-center">Jaiquez Book Blog</h1>
+          <div className={antonSC.className}>
+            <h1 className="text-center">Jaiquez Book Blog</h1>
+
+          </div>
         </div>
         {entries.map((entry, index) => (
           <div  key={index}>
@@ -117,16 +136,18 @@ const deleteSummaryAPI = async (id) => {
                     <div className="d-flex flex-column align-items-center">
                       <img src={entry.image_large_url} className="img-fluid" alt="" />
                       <div className="mt-3">
-                        <h1>{entry.rating_average}<sup>/ 5 <sup><StarIcon className={styles.star}/></sup></sup></h1>
+                        <h1 className={worksans.className}>{entry.rating_average}<sup>/ 5 <sup><StarIcon className={styles.star}/></sup></sup></h1>
                       </div>
                     </div>
                   </div>
                   <div className={styles.div}>
                     <div className=" p-3">
-                      <h2 className={styles.h2}>{entry.title}</h2>
-                      <p>{entry.summary} <EditSummary id={entry.id} entrySummary={entry.summary} /></p>
-                      <p>Started on: <span className={styles.time}>{entry.entry_created}</span></p>
-                      <Link href={`/entry/${entry.id}`} color="inherit"><Button className={styles.readmore} variant="outlined">Read More</Button></Link>
+                      <div className={antonSC.className}>
+                      <h2 className={styles.h2 }>{entry.title}</h2>
+                      </div>
+                      <p className={worksans.className}>{entry.summary} <EditSummary id={entry.id} entrySummary={entry.summary} /></p>
+                      <p className={worksans.className}>Started on: <span className={styles.time}>{entry.entry_created}</span></p>
+                      <Link href={`/entry/${entry.id}`} color="inherit"><Button className={styles.readmore} variant="outlined"><span className={worksans.className}>Read More</span></Button></Link>
                     </div>
                   </div>
                 </div>

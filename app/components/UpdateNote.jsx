@@ -6,6 +6,15 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import axios from "axios";
 import styles from '../styles/home.module.css';
 
+import { Work_Sans } from "next/font/google";
+
+
+const worksans =  Work_Sans({
+  subsets:['latin'],
+  display: 'swap',
+})
+
+
 function UpdateNote (props) {
     //console.log(props);
 
@@ -46,7 +55,7 @@ function UpdateNote (props) {
                 </Button>
                 <Modal  show={show} onHide={handleClose}>
                     <Modal.Header className={styles.modal} closeButton>
-                    <Modal.Title className={styles.modaltitle}>Update Note</Modal.Title>
+                    <Modal.Title className={styles.modaltitle}> <span className={worksans.className}>Update Note</span></Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                     <Form >
@@ -54,10 +63,10 @@ function UpdateNote (props) {
                         className="mb-3"
                         controlId="exampleForm.ControlTextarea1"
                         >
-                        <Form.Label>Note</Form.Label>
+                        <Form.Label  className={worksans.className}>Note</Form.Label>
                         <Form.Control as="textarea" value={prevNote} onChange={e => setNewNote(e.target.value)}  rows={3} />
                         </Form.Group>
-                        <Button variant="outlined" type="submit" onClick={e => updateNoteAPI(props.id)}>Update</Button>
+                        <Button variant="outlined" type="submit" onClick={e => updateNoteAPI(props.id)} className={styles.actionbutton} > <span className={worksans.className}>Update</span></Button>
                     </Form>
                     </Modal.Body>
                 </Modal>
