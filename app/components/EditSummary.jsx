@@ -45,8 +45,8 @@ function EditSummary(props) {
                 <EditOutlinedIcon />
             </Button>
             <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                <Modal.Title>Update Summary</Modal.Title>
+                <Modal.Header className={styles.modal} closeButton>
+                <Modal.Title className={styles.modaltitle}>Update Summary</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                 <Form>

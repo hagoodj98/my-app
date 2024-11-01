@@ -17,6 +17,48 @@ export default function Home() {
 
 const [entries, setEntries] = useState([]);
 
+const sortByTitle = async () => {
+  try {
+    const response = await axios.get(`http://localhost:4000/sortbytitle`);
+    console.log(response);
+    
+    setEntries(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+const sortByRecency = async () => {
+  try {
+    const response = await axios.get(`http://localhost:4000/sortbyrecency`);
+    console.log(response);
+    
+    setEntries(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+const sortByOldest = async () => {
+  try {
+    const response = await axios.get(`http://localhost:4000/sortbyoldest`);
+    console.log(response);
+    
+    setEntries(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+const sortByRevelance = async () => {
+  try {
+    const response = await axios.get(`http://localhost:4000/sortbyrevelance`);
+    console.log(response);
+    
+    setEntries(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
 const getEntries = async () => {
   try {
     const response = await axios.get(`http://localhost:4000/`);
@@ -52,10 +94,10 @@ const deleteSummaryAPI = async (id) => {
         <div className={styles.sortnav}>
           <h3 className="mx-2">Sort By:</h3>
           <div className="d-flex gap-2">
-            <Button variant="text">Title</Button>
-            <Button variant="text">Latest</Button>
-            <Button variant="text">Oldest</Button>
-            <Button variant="text">Most Popular</Button>
+            <Button onClick={sortByTitle} variant="text">Title</Button>
+            <Button onClick={sortByRecency} variant="text">Latest</Button>
+            <Button onClick={sortByOldest} variant="text">Oldest</Button>
+            <Button onClick={sortByRevelance} variant="text">Most Popular</Button>
           </div>
         </div>
         <div className={styles.header}>

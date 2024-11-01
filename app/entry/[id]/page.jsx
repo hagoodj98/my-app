@@ -20,7 +20,7 @@ import AddIcon from '@mui/icons-material/Add';
 import styles from '../../styles/home.module.css'
 import IconButton from '@mui/material/IconButton';
 import Fade from '@mui/material/Fade';
-
+import Footer from '../../components/footer'
 
 export default function EntryID () {
     const params = useParams();
@@ -158,6 +158,7 @@ export default function EntryID () {
             <div>
                 <NoteField   id ={params.id}/>
             </div>
+            <Footer />
         </div>
         </main>
     )
