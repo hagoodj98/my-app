@@ -6,9 +6,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Link from '@mui/material/Link';
 import Button from '@mui/material/Button';
 import EditSummary from './components/EditSummary';
-
-
-
+import styles from './styles/home.module.css';
+import StarIcon from '@mui/icons-material/Star';
+import IconButton from '@mui/material/IconButton';
 
 
 
@@ -29,33 +29,48 @@ const [entries, setEntries] = useState([]);
     }
   }
 
-  useEffect(() => {
-    getEntries();
-},[]);
-
-
+    useEffect(() => {
+      getEntries();
+  },[]);
 
   return ( 
       <div>
-        <div>
-          <h4>Sort By:</h4>
-          <Button>Title</Button>
-          <Button>Latest</Button>
-          <Button>Oldest</Button>
-          <Button>Most Popular</Button>
+        <div className={styles.sortnav}>
+          <h3>Sort By:</h3>
+          <div className="d-flex gap-2">
+            <Button variant="outlined">Title</Button>
+            <Button variant="outlined">Latest</Button>
+            <Button variant="outlined">Oldest</Button>
+            <Button variant="outlined">Most Popular</Button>
+          </div>
         </div>
-        <h1>Jaiquez Book Blog</h1>
+        <div className={styles.header}>
+          <h1 className="text-center">Jaiquez Book Blog</h1>
+        </div>
         {entries.map((entry, index) => (
-          <div key={index}>
-
-            <img src={entry.image_large_url} className="img-fluid" alt="" />
-            <DeleteIcon />
-            <h1>{entry.title}</h1>
-            <p>{entry.summary} <EditSummary /></p>
-            <h1>{entry.rating_average}</h1>
-          
-            <Link href={`/entry/${entry.id}`} color="inherit"><Button variant="outlined">Read More</Button></Link>
-          
+          <div  key={index}>
+            <div className="container">
+              <div className="d-flex justify-start  justify-content-md-end">
+                <IconButton aria-label="delete" size="large">
+                  <DeleteIcon fontSize="inherit" />
+                </IconButton>
+              </div>
+              <div className=" d-flex flex-column gap-3 flex-md-row">
+                <div className={styles.div}>
+                  <div className="d-flex flex-column align-items-center">
+                    <img src={entry.image_large_url} className="img-fluid" alt="" />
+                    <div className="mt-3">
+                      <h1>{entry.rating_average}<sup>/ 5 <sup><StarIcon /></sup></sup></h1>
+                    </div>
+                  </div>
+                </div>
+                <div className={styles.div}>
+                  <h1>{entry.title}</h1>
+                  <p>{entry.summary} <EditSummary /></p>
+                  <Link href={`/entry/${entry.id}`} color="inherit"><Button variant="outlined">Read More</Button></Link>
+                </div>
+              </div>
+            </div>
           </div>  
         ))}
   
