@@ -2,9 +2,16 @@
 
 import React, {useState} from 'react'
 import axios from 'axios';
-import Button from "react-bootstrap/Button";
+import Button from '@mui/material/Button';
 import Form from 'react-bootstrap/Form';
 import { useRouter } from 'next/navigation'
+import styles from '../styles/home.module.css'
+import TextField from '@mui/material/TextField';
+import Footer from '../components/footer';
+
+
+
+
 
 export default function TextControlsExample() {
     const router = useRouter();
@@ -48,14 +55,39 @@ export default function TextControlsExample() {
       }
 
     return (
-      <form onSubmit={onSubmitForm}>
-        <div>
-          <input type="text"  name="isbn" onChange={handleChange} value={bookInfo.isbn} placeholder="name@example.com" />
-          <textarea  name="summary"  onChange={handleChange} value={bookInfo.summary}  rows={3} />
-          <Button  type='submit' variant="primary">Secondary</Button>
-        </div>
+      <main>
+        <div className='container d-flex flex-column'>
+          <div className={styles.findentrybuttoncontainer}>
+            <div className={styles.entrybuttonexit}>
+              <Button href='../' variant="outlined">Back To Blog</Button>
+            </div>
+          </div>
           
-      </form>
+          <div className={styles.addentry}>
+            <div className={styles.form}>
+            <h2 className='m-2'>Find Book</h2>
+            <div className={styles.d}>
+              <Form onSubmit={onSubmitForm}>
+                <Form.Group  controlId="exampleForm.ControlInput1">
+                  <TextField name="isbn" onChange={handleChange} value={bookInfo.isbn} required  fullWidth  id="fullWidth" label="Enter the ISBN" variant="outlined" />
+                </Form.Group>
+                <br />
+                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                  <Form.Control as={"textarea"} name="summary" required  onChange={handleChange} placeholder='Enter Summary...' value={bookInfo.summary}  rows={3} />
+                </Form.Group>
+                <div className='d-flex justify-center'>
+                  <Button type='submit' variant="outlined">Add Entry</Button>
+                </div>
+              </Form>
+            </div>
+            </div>
+             
+            </div>
+        </div>
+        <Footer />
+      </main>
     );
   }
   
+
+          

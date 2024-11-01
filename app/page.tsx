@@ -10,7 +10,7 @@ import styles from './styles/home.module.css';
 import StarIcon from '@mui/icons-material/Star';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
-
+import Footer from './components/footer';
 
 export default function Home() {
 
@@ -82,6 +82,7 @@ const [entries, setEntries] = useState([]);
         <div className="d-flex justify-center p-2">
           <Link href="/findentry"><Button className={styles.add}><AddIcon fontSize="large" /></Button></Link>
         </div>
+        <Footer />
       </div>
   );
 }
