@@ -12,7 +12,7 @@ import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import Footer from './components/footer';
 import { Work_Sans, Anton } from "next/font/google";
-
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 
 const antonSC = Anton({
 subsets: ['latin'],
@@ -116,9 +116,10 @@ const deleteSummaryAPI = async (id) => {
             </div>
           </div>
         </div>
+        
         <div className={styles.header}>
           <div className={antonSC.className}>
-            <h1 className="text-center">Jaiquez Book Blog</h1>
+            <h1 className="text-center"><AutoStoriesIcon fontSize="large" /> Jaiquez Book Blog</h1>
 
           </div>
         </div>
