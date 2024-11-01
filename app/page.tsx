@@ -17,21 +17,35 @@ export default function Home() {
 
 const [entries, setEntries] = useState([]);
 
-
-  const getEntries = async () => {
-    try {
-      const response = await axios.get(`http://localhost:4000/`);
-      console.log(response);
-      
-      setEntries(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+const getEntries = async () => {
+  try {
+    const response = await axios.get(`http://localhost:4000/`);
+    console.log(response);
+    
+    setEntries(response.data);
+  } catch (error) {
+    console.log(error);
   }
+}
 
-    useEffect(() => {
-      getEntries();
-  },[]);
+  useEffect(() => {
+    getEntries();
+},[]);
+
+const deleteSummaryAPI = async (id) => {
+  console.log(id + "summary to delete");
+   try {
+       const deleteSumary = await axios({
+           method:'delete',
+           url: `http://localhost:4000/entry/${id}`,
+           });
+           setEntries(entries.filter(entry => entry.id !== id));
+   } catch (error) {
+     console.log(error);
+     
+   }
+ }
+ 
 
   return ( 
       <div>
@@ -50,10 +64,9 @@ const [entries, setEntries] = useState([]);
         {entries.map((entry, index) => (
           <div  key={index}>
             <div className="container">
-            
               <div className={styles.entry}> 
                 <div className="d-flex justify-start  justify-content-md-end">
-                  <IconButton className={styles.delete} aria-label="delete" size="large">
+                  <IconButton onClick={() => deleteSummaryAPI(entry.id)} className={styles.delete} aria-label="delete" size="large">
                     <DeleteIcon fontSize="inherit" />
                   </IconButton>
                 </div>
@@ -69,7 +82,7 @@ const [entries, setEntries] = useState([]);
                   <div className={styles.div}>
                     <div className=" p-3">
                       <h2 className={styles.h2}>{entry.title}</h2>
-                      <p>{entry.summary} <EditSummary entrySummary={entry.summary} /></p>
+                      <p>{entry.summary} <EditSummary id={entry.id} entrySummary={entry.summary} /></p>
                       <p>Started on: <span className={styles.time}>{entry.entry_created}</span></p>
                       <Link href={`/entry/${entry.id}`} color="inherit"><Button className={styles.readmore} variant="outlined">Read More</Button></Link>
                     </div>
