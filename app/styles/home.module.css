@@ -16,12 +16,20 @@
 .delete:hover{
     color: #BEB1A0;
 }
+.ratingcount{
+    font-size: 15px;
+    color: #BEB1A0;
+}
+.img{
+    font-style: italic;
 
+    display: inline-block;
+}
 .edit{
     color: #3C93A7;
 }
 .findentrybuttoncontainer{
-  margin: 200px 0;
+  margin: 50px 0;
 }
 .entrybuttonexit{
     height: 100%;
@@ -36,12 +44,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 .form {
     width: 100%;
     display: flex;
-    
     flex-direction: column;
 }
 .time{
@@ -156,9 +162,9 @@
         width: 50%;
     }
     .sortnav{
-        width: 40%;
-        padding-top: 20px;
-        margin-left: 40px;
+        display: flex;
+        justify-content: center;
+     
         color: #BEB1A0;
     }
 }

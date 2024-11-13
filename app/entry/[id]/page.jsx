@@ -22,23 +22,18 @@ import IconButton from '@mui/material/IconButton';
 import Fade from '@mui/material/Fade';
 import Footer from '../../components/footer'
 import { Work_Sans, Anton } from "next/font/google";
-
+import StarIcon from '@mui/icons-material/Star';
 
 const antonSC = Anton({
 subsets: ['latin'],
 display: 'swap',
 weight: '400',
-
 })
+
 const worksans =  Work_Sans({
   subsets:['latin'],
   display: 'swap',
 })
-
-
-
-
-
 
 export default function EntryID () {
     const params = useParams();
@@ -53,7 +48,6 @@ export default function EntryID () {
       setExpanded((prevExpanded) => !prevExpanded);
     };
     //console.log(params.id +);
-
     
     const entryIdAPI = async () => {
         try {
@@ -117,7 +111,10 @@ export default function EntryID () {
                         </div>
                         <div className={styles.div}>
                             <div className={styles.aboutentry}>
-                                <h2 className={styles.abouttitle}><span className={antonSC.className}>{entry.title} | {entry.authors}</span></h2>
+                                <div className="d-flex align-self-center">
+                                    <h1 className={worksans.className}>{entry.rating_average}<sup> /5<StarIcon className={styles.star}/> <span className={styles.ratingcount}>{entry.rating_count} review/s</span></sup></h1>
+                                </div>
+                                <h2 className={styles.abouttitle}><span className={antonSC.className}>{entry.title} by  {entry.authors.slice(2,entry.authors.length - 2)}</span></h2>
                                 <Accordion>
                                     <AccordionSummary  className={styles.accordion}  expandIcon={<ExpandMoreIcon />} aria-controls="panel2-content" id="panel2-header">
                                         <h5 className={worksans.className}>Published On</h5>
@@ -139,7 +136,7 @@ export default function EntryID () {
                                         <h5 className={worksans.className}>Subjects</h5>
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                        <p className={worksans.className}>{entry.subjects}</p>
+                                        <p className={worksans.className}>{entry.subjects.slice(2,entry.subjects.length - 2)}</p>
                                     </AccordionDetails>
                                 </Accordion> 
                                 <div className="d-flex gap-3 mt-3">
