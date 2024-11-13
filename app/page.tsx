@@ -144,7 +144,7 @@ const deleteSummaryAPI = async (id) => {
                   <div className={styles.div}>
                     <div className=" p-3">
                       <div className={antonSC.className}>
-                      <h2 className={styles.h2 }>{entry.title}</h2>
+                      <h2 className={styles.h2 }>{entry.title} | {entry.authors}</h2>
                       </div>
                       <p className={worksans.className}>{entry.summary} <EditSummary id={entry.id} entrySummary={entry.summary} /></p>
                       <p className={worksans.className}>Started on: <span className={styles.time}>{entry.entry_created}</span></p>

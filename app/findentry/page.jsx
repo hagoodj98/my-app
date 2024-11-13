@@ -23,15 +23,13 @@ const worksans =  Work_Sans({
 
 
 
-
 export default function TextControlsExample() {
     const router = useRouter();
     const [bookInfo, setBookInfo] = useState({
         isbn: "",
         summary: "",
     });
-    //console.log(bookInfo.isbn);
-    
+    const [error, setError] = useState("");
     
     const onSubmitForm  = async event => {
         event.preventDefault();
@@ -47,12 +45,24 @@ export default function TextControlsExample() {
             //headers: {"Content-Type": "application/json"},
             });
             console.log(response);
-            //console.log(response);
+            if (response.data === "Entry does not exist, try again") {
+              setError(response.data);
+              router.push("/findentry")
+            }
+             else if (response.data === "Entry already exists, try again") {
+              setError(response.data);
+              router.push("/findentry")
+            }
+            else {
             router.push('../');
-        } catch (error) {
-         console.log(error);
+            }
+            //console.log(response);
+        } catch (err) {
+            console.error(err);
         }
-    }
+      }
+   
+
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -80,7 +90,12 @@ export default function TextControlsExample() {
             <div className={styles.d}>
               <Form onSubmit={onSubmitForm}>
                 <Form.Group  controlId="exampleForm.ControlInput1">
-                  <TextField name="isbn" onChange={handleChange} value={bookInfo.isbn} required  fullWidth  id="fullWidth" label="Enter the ISBN" variant="outlined" />
+                  {error === "Entry already exists, try again" ? <TextField name="isbn" error onChange={handleChange}  fullWidth helperText={error} value={bookInfo.isbn} required   id="fullWidth" label="Error" variant="outlined" />
+                    : 
+                    error === "Entry does not exist, try again" ? <TextField error  name="isbn" id="outlined-error-helper-text" fullWidth  onChange={handleChange} value={bookInfo.isbn} required label="Error"  helperText={error}/> 
+                    : 
+                    <TextField name="isbn" onChange={handleChange} value={bookInfo.isbn} required  fullWidth  id="fullWidth" label="Enter the ISBN" variant="outlined" />
+                  }
                 </Form.Group>
                 <br />
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
@@ -99,6 +114,7 @@ export default function TextControlsExample() {
       </main>
     );
   }
-  
+  // <TextField error id="outlined-error-helper-text" label="Error" defaultValue="Hello World" helperText="Entry does not exist."/>
+//  <TextField error id="outlined-error-helper-text" label="Error" defaultValue="Hello World" helperText="Entry already exist."/>
 
           
