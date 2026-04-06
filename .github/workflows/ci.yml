@@ -17,6 +17,7 @@ jobs:
   verify:
     name: Verify code quality
     runs-on: ubuntu-latest
+<<<<<<< migration
     services:
       postgres:
         image: postgres:16
@@ -37,6 +38,8 @@ jobs:
       PG_HOST: localhost
       PG_PORT: 5432
       PG_DATABASE: bookblog
+=======
+>>>>>>> main
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -47,10 +50,13 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
+<<<<<<< migration
       - name: Setup database schema
         run: psql -h localhost -U postgres -d bookblog -f lib/database/schema.sql
         env:
           PGPASSWORD: postgres
+=======
+>>>>>>> main
       - name: Type check
         run: npm run --if-present type-check
       - name: Lint code
