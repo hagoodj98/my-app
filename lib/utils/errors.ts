@@ -8,7 +8,10 @@ class RequestError extends Error {
   }
 }
 
-export function createRequestError(statusCode: number, message: string): RequestError {
+export function createRequestError(
+  statusCode: number,
+  message: string,
+): RequestError {
   return new RequestError(statusCode, message);
 }
 
