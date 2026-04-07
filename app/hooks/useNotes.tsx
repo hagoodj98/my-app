@@ -1,5 +1,6 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { Entry, NoteType } from "../components/types";
 
 export const useNotes = (id: string) => {
@@ -27,8 +28,10 @@ export const useNotes = (id: string) => {
         });
 
         await entryIdAPI();
+        toast.success("Note deleted");
       } catch (error) {
         console.error(error);
+        toast.error("Failed to delete note");
       }
     },
     [entryIdAPI],
@@ -47,8 +50,10 @@ export const useNotes = (id: string) => {
           }),
         });
         await entryIdAPI();
+        toast.success("Note added");
       } catch (error) {
         console.error(error);
+        toast.error("Failed to add note");
       }
     },
     [entryIdAPI],
@@ -70,10 +75,12 @@ export const useNotes = (id: string) => {
           }),
         });
         await entryIdAPI();
+        toast.success("Note updated");
       } catch (error: unknown) {
         if (error instanceof Error) {
           console.error(error.message);
         }
+        toast.error("Failed to update note");
       }
     },
     [entryIdAPI, id],
