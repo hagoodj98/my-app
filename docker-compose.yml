@@ -5,12 +5,8 @@ services:
     restart: unless-stopped
     env_file:
       - .env.local
-    environment:
-      POSTGRES_USER: ${PG_USER}
-      POSTGRES_PASSWORD: ${PG_PASSWORD}
-      POSTGRES_DB: ${PG_DATABASE}
     ports:
-      - "${PG_PORT:-5432}:5432"
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./lib/database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
