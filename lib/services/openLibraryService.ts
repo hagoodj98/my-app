@@ -7,7 +7,6 @@ const getWorkKey = async (
   const book = await fetch(`https://openlibrary.org/isbn/${isbn}.json`); // Example API call: https://openlibrary.org/isbn/0451526538.json
   //Data structure example: { key: "/books/OL123M", works: [{ key: "/works/OL456W" }] }
   const data = await book.json();
-  console.log(data);
   //We go ahead and get the description of the book if the work key exists, as this is a common piece of data that users want to see and it requires an additional API call, so we want to fetch it at the same time as the work key to avoid making multiple API calls later on when we need this data
   const description = data?.description?.value || null;
   const workKey = data?.works?.[0]?.key || null;

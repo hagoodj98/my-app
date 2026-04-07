@@ -42,7 +42,7 @@ export const useEntries = (entry?: string) => {
       );
       toast.success("Entry deleted");
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast.error("Failed to delete entry");
     }
   }, []);
@@ -65,7 +65,7 @@ export const useEntries = (entry?: string) => {
         );
         toast.success("Summary updated");
       } catch (error) {
-        console.log(error);
+        console.error(error);
         toast.error("Failed to update summary");
       }
     },
@@ -78,7 +78,7 @@ export const useEntries = (entry?: string) => {
       const data: Entry[] = await response.json();
       setEntries(data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, []);
 

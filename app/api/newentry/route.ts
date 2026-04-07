@@ -4,8 +4,6 @@ import { handleApiError } from "@/lib/utils/errors";
 
 export async function POST(req: NextRequest) {
   try {
-    console.log("heelo");
-
     const body = await req.json();
     const isbn = body?.isbn;
     const summary = body?.summary;
