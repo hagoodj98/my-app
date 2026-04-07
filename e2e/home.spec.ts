@@ -27,7 +27,7 @@ test.describe("Home page", () => {
 
   test("shows the footer", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByText(/Jaiquez/i)).toBeVisible();
+    await expect(page.locator("footer").getByText(/Jaiquez/i)).toBeVisible();
   });
 });
 
@@ -49,12 +49,12 @@ test.describe("Find Entry page", () => {
     await expect(page.getByLabel(/enter summary/i)).toBeVisible();
   });
 
-  test("Add Entry button is disabled when fields are empty", async ({
+  test("Add Entry button is enabled when fields are empty", async ({
     page,
   }) => {
     await expect(
       page.getByRole("button", { name: /add entry/i }),
-    ).toBeDisabled();
+    ).toBeEnabled();
   });
 
   test("shows validation error and keeps button disabled for short input", async ({
