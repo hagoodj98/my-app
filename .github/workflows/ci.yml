@@ -17,6 +17,26 @@ jobs:
   verify:
     name: Verify code quality
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: bookblog
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      PG_USER: postgres
+      PG_PASSWORD: postgres
+      PG_HOST: localhost
+      PG_PORT: 5432
+      PG_DATABASE: bookblog
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -27,6 +47,10 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
+      - name: Setup database schema
+        run: psql -h localhost -U postgres -d bookblog -f lib/database/schema.sql
+        env:
+          PGPASSWORD: postgres
       - name: Type check
         run: npm run --if-present type-check
       - name: Lint code
