@@ -1,18 +1,15 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { Entry, NoteType } from "../components/types";
+import { NoteType } from "../components/types";
 
 export const useNotes = (id: string) => {
   const [notes, setNotes] = useState<NoteType[]>([]);
-  const [entry, setEntry] = useState<Entry>({} as Entry);
 
   const entryIdAPI = useCallback(async () => {
     try {
       const response = await fetch(`/api/notes/${id}`);
       const data = await response.json();
-      console.log(data);
-
       setNotes(data);
     } catch (error) {
       console.error(error);
@@ -63,7 +60,6 @@ export const useNotes = (id: string) => {
     async ({ prevNote }: { prevNote: { note: string; noteId: string } }) => {
       try {
         const body = { prevNote };
-        console.log(body);
         await fetch(`/api/notes/${id}`, {
           method: "PATCH",
           headers: {
@@ -94,8 +90,6 @@ export const useNotes = (id: string) => {
   }, [entryIdAPI]);
   return {
     notes,
-    entry,
-    setEntry,
     entryIdAPI,
     updateNoteAPI,
     deleteNoteAPI,
