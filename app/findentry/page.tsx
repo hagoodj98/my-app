@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 import styles from "../styles/home.module.css";
 import Input from "../components/ui/Input";
 import { Work_Sans, Anton } from "next/font/google";
@@ -43,6 +44,7 @@ export default function TextControlsExample() {
         throw new Error("Network response was not ok");
       }
 
+      toast.success("Entry added!");
       router.push("/");
     } catch (err) {
       console.error(err);

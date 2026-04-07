@@ -1,5 +1,6 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { Entry } from "../components/types";
 
 export const useEntries = (entry?: string) => {
@@ -39,8 +40,10 @@ export const useEntries = (entry?: string) => {
       setEntries((prevEntries) =>
         prevEntries.filter((entry) => entry.id !== id),
       );
+      toast.success("Entry deleted");
     } catch (error) {
       console.log(error);
+      toast.error("Failed to delete entry");
     }
   }, []);
   const updateEntrySummary = useCallback(
@@ -60,8 +63,10 @@ export const useEntries = (entry?: string) => {
             entry.id === id ? { ...entry, summary: prevSummary } : entry,
           ),
         );
+        toast.success("Summary updated");
       } catch (error) {
         console.log(error);
+        toast.error("Failed to update summary");
       }
     },
     [],

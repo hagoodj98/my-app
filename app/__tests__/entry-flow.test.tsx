@@ -2,8 +2,16 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
+import { toast } from "react-toastify";
 import EditSummary from "../components/EditSummary";
 import FindEntry from "../findentry/page";
+
+vi.mock("react-toastify", () => ({
+  toast: {
+    success: vi.fn(),
+    error: vi.fn(),
+  },
+}));
 
 vi.mock("next/font/google", () => ({
   Work_Sans: () => ({ className: "" }),
@@ -144,6 +152,23 @@ describe("FindEntry form", () => {
     await user.click(screen.getByRole("button", { name: /add entry/i }));
     await waitFor(() => {
       expect(mockPush).toHaveBeenCalledWith("/");
+    });
+  });
+
+  it("shows a success toast when the entry is created", async () => {
+    const user = userEvent.setup();
+    (fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce(
+      new Response(JSON.stringify({}), { status: 200 }),
+    );
+    render(<FindEntry />);
+    await user.type(screen.getByLabelText(/isbn/i), "9780451524935");
+    await user.type(
+      screen.getByLabelText(/enter summary/i),
+      "A dystopian novel set in a totalitarian society",
+    );
+    await user.click(screen.getByRole("button", { name: /add entry/i }));
+    await waitFor(() => {
+      expect(toast.success).toHaveBeenCalledWith("Entry added!");
     });
   });
 

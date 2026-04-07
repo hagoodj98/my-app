@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event";
 import React from "react";
 import NoteField from "../components/NoteField";
 import Notes from "../components/Notes";
+import UpdateNote from "../components/UpdateNote";
 import { NoteType } from "../components/types";
 
 vi.mock("next/font/google", () => ({
@@ -118,5 +119,58 @@ describe("Notes", () => {
     const buttons = screen.getAllByRole("button");
     await user.click(buttons[1]); // delete button
     expect(handlers.deleteNoteAPI).toHaveBeenCalledWith("1");
+  });
+});
+
+// ─── UpdateNote ───────────────────────────────────────────────────────────────
+
+describe("UpdateNote", () => {
+  beforeEach(() => vi.clearAllMocks());
+
+  it("renders the edit icon button", () => {
+    render(<UpdateNote id="1" note="My note" updateNoteAPI={vi.fn()} />);
+    expect(screen.getByRole("button")).toBeInTheDocument();
+  });
+
+  it("opens the modal with the current note pre-filled when edit is clicked", async () => {
+    const user = userEvent.setup();
+    render(<UpdateNote id="1" note="My note" updateNoteAPI={vi.fn()} />);
+    await user.click(screen.getByRole("button"));
+    expect(
+      screen.getByRole("heading", { name: /update note/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByDisplayValue("My note")).toBeInTheDocument();
+  });
+
+  it("calls updateNoteAPI with the updated text when submitted", async () => {
+    const updateNoteAPI = vi.fn().mockResolvedValue(undefined);
+    const user = userEvent.setup();
+    render(<UpdateNote id="1" note="My note" updateNoteAPI={updateNoteAPI} />);
+    await user.click(screen.getByRole("button")); // open modal
+    const input = screen.getByDisplayValue("My note");
+    await user.clear(input);
+    await user.type(input, "Updated note text");
+    await user.click(screen.getByRole("button", { name: /update note/i }));
+    await waitFor(() => {
+      expect(updateNoteAPI).toHaveBeenCalledWith({
+        prevNote: { note: "Updated note text", noteId: "1" },
+      });
+    });
+  });
+
+  it("closes the modal after a successful update", async () => {
+    const updateNoteAPI = vi.fn().mockResolvedValue(undefined);
+    const user = userEvent.setup();
+    render(<UpdateNote id="1" note="My note" updateNoteAPI={updateNoteAPI} />);
+    await user.click(screen.getByRole("button")); // open modal
+    expect(
+      screen.getByRole("heading", { name: /update note/i }),
+    ).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: /update note/i }));
+    await waitFor(() => {
+      expect(
+        screen.queryByRole("heading", { name: /update note/i }),
+      ).not.toBeInTheDocument();
+    });
   });
 });
