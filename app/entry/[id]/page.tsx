@@ -117,7 +117,7 @@ export default function EntryID() {
             <p>
               <span className="font-semibold">Started reading on:</span>{" "}
               <span className={styles.time}>
-                {new Date(entry.entry_created).toLocaleString()}
+                {new Date(entry.entry_created).toLocaleDateString()}
               </span>
             </p>
             <div className="mt-2">

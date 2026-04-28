@@ -145,7 +145,7 @@ const Entries = () => {
                     <p className={worksans.className}>
                       Started reading on:{" "}
                       <span className={styles.time}>
-                        {new Date(entry.entry_created).toLocaleString()}
+                        {new Date(entry.entry_created).toLocaleDateString()}
                       </span>
                     </p>
                     <Link href={`/entry/${entry.id}`} color="inherit">
